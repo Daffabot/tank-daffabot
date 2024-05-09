@@ -253,6 +253,7 @@ document.addEventListener("DOMContentLoaded", function() {
 
         /////////////////////////////
 
+(function() {
         let startGame = function () {
 
             reset();
@@ -464,7 +465,6 @@ document.addEventListener("DOMContentLoaded", function() {
                     returnToBase(icons[2]);
                     ttank[0] = " ";
                 }
-
             }
 
             lastTime = Date.now();
@@ -497,8 +497,7 @@ document.addEventListener("DOMContentLoaded", function() {
                 }
                 lastTime = now;
                 if (!isGameOver) requestAnimFrame(main);
-
-            };
+            }
 
             function update(dt) {
 
@@ -769,8 +768,6 @@ document.addEventListener("DOMContentLoaded", function() {
                         }
                     }
                 }
-
-
             }
 
             function render() {
@@ -953,6 +950,7 @@ document.addEventListener("DOMContentLoaded", function() {
                 }
             }
         }
+})();
 
         /////////////^^^^^^^^^^^^^^////////////
 
