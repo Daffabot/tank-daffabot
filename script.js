@@ -61,9 +61,7 @@ let requestAnimFrame = (function () {
                     window.setTimeout(callback, 1000 / 60);
                 }
         })
-
-document.addEventListener("DOMContentLoaded", function() {
-            function Sprite(url, pos, size, resized, animspeed, frames, _index, once) {
+function Sprite(url, pos, size, resized, animspeed, frames, _index, once) {
                 this.pos = pos;
                 this.size = size;
                 this.resized = resized;
@@ -202,6 +200,7 @@ document.addEventListener("DOMContentLoaded", function() {
             icon.dragable = false;
         }
 
+document.addEventListener("DOMContentLoaded", function() {
         let gameOver = function (a) {
 
             let _min = Math.floor(gameTime / 60);
