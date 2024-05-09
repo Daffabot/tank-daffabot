@@ -17,33 +17,7 @@ document.addEventListener("DOMContentLoaded", function() {
             counter2 = 0,
             gameNum = 0,
             game_paused = false,
-            lvl = 0,     // 0...9
-            inf = function () {
-                let popup = document.getElementById('infdiv');
-                let btn = document.getElementById('info');
-                if (popup.style.display !== 'block') {
-                    popup.style.display = 'block';
-                    info.style.color = 'white';
-                    info.style.backgroundColor = 'red';
-                }
-                else {
-                    popup.style.display = 'none';
-                    info.style.color = 'red';
-                    info.style.backgroundColor = '#f3f3f3';
-                }
-            },
-            changeLvl = function (op) {
-                if (op == 1 && lvl < 9) {
-                    lvl++;
-                }
-                if (op == 0 && lvl > 0) {
-                    lvl--;
-                }
-                setTimeout(() => {
-                        let _dif = document.getElementsByClassName("dif");
-                        _dif[1].innerHTML = dif[lvl];
-                }, 900);
-            }
+            lvl = 0     // 0...9
 
             function Sprite(url, pos, size, resized, animspeed, frames, _index, once) {
                 this.pos = pos;
@@ -1047,3 +1021,31 @@ function startGame() {
                 }
             }
         }
+
+            function changeLvl(op) {
+                if (op == 1 && lvl < 9) {
+                    lvl++;
+                }
+                if (op == 0 && lvl > 0) {
+                    lvl--;
+                }
+                setTimeout(() => {
+                        let _dif = document.getElementsByClassName("dif");
+                        _dif[1].innerHTML = dif[lvl];
+                }, 900);
+            }
+
+            function inf() {
+                let popup = document.getElementById('infdiv');
+                let btn = document.getElementById('info');
+                if (popup.style.display !== 'block') {
+                    popup.style.display = 'block';
+                    info.style.color = 'white';
+                    info.style.backgroundColor = 'red';
+                }
+                else {
+                    popup.style.display = 'none';
+                    info.style.color = 'red';
+                    info.style.backgroundColor = '#f3f3f3';
+                }
+            }
