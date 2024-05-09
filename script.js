@@ -17,7 +17,14 @@ let w, h, k, xo, yo,
             counter2 = 0,
             gameNum = 0,
             game_paused = false,
-            lvl = 0
+            lvl = 0,
+            xxx = 0,
+            yyy = 0;
+        let mouse = {
+            x: 0,
+            y: 0,
+            down: false
+        }
 function reset() {
             units = [];
             icons = [];
@@ -232,14 +239,6 @@ document.addEventListener("DOMContentLoaded", function() {
             }
         }
 
-        let xxx = 0,
-            yyy = 0;
-        let mouse = {
-            x: 0,
-            y: 0,
-            down: false
-        }
-
         /////////////////////////////
 
         /////////////^^^^^^^^^^^^^^////////////
@@ -344,9 +343,7 @@ function startGame() {
 
             maindiv.innerHTML = '<canvas id="c"></canvas>';
 
-            setTimeout(() => {
-                        let c = document.getElementById("c");
-                }, 100);
+            let c = document.getElementById("c");
 
             let ctx = c.getContext("2d");
 
