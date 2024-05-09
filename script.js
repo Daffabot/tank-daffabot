@@ -253,8 +253,7 @@ document.addEventListener("DOMContentLoaded", function() {
 
         /////////////////////////////
 
-(function() {
-        let startGame = function () {
+        function startGame() {
 
             reset();
 
@@ -950,7 +949,6 @@ document.addEventListener("DOMContentLoaded", function() {
                 }
             }
         }
-})();
 
         /////////////^^^^^^^^^^^^^^////////////
 
