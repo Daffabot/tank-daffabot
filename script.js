@@ -57,8 +57,7 @@ document.addEventListener("DOMContentLoaded", function() {
                 this.once = once;
             }
 
-            Sprite.prototype =
-            {
+            Sprite.prototype = {
                 update: function (dt) {
                     this._index += this.animspeed * dt;
                 },
@@ -78,9 +77,9 @@ document.addEventListener("DOMContentLoaded", function() {
                     let y = this.pos[1];
                     x += frame * this.size[0]; ctx.drawImage(resources.get(this.url), x, y, this.size[0], this.size[1], 0, 0, this.resized[0], this.resized[1]);
                 }
-            };
+            }
             window.Sprite = Sprite;
-        })();
+        })
 
         (function () {
             function Unit(status, pos, hp, speed, maxspeed, range, damage, reload, angle, defaultangle, dir, sprite) {
@@ -144,12 +143,9 @@ document.addEventListener("DOMContentLoaded", function() {
 
                         }
                     }
-
-
                 },
 
                 getDistance: function (t) {
-
                     return Math.floor(Math.sqrt(Math.pow(this.pos[0] - t.pos[0], 2) + Math.pow(this.pos[1] - t.pos[1], 2)));
                 },
 
@@ -171,38 +167,36 @@ document.addEventListener("DOMContentLoaded", function() {
                     this.lastshot = 0;
 
                 }
-            };
+            }
 
             window.Unit = Unit;
-        })();
+        })
 
         let getRandom = function (min, max) {
             return Math.floor(Math.random() * (max - min + 1)) + min;
-        };
+        }
 
         let getDistance = function (own, ally) {
-
             return Math.floor(Math.sqrt(Math.pow(own[0] - ally[0], 2) + Math.pow(own[1] - ally[1], 2)));
-        };
+        }
 
         let deployUnit = function (unit, pos) {
             let u = unit;
             units.push(new Unit(u[0], u[1], u[2], u[3], u[4], u[5], u[6], u[7], u[8], u[9], u[10], u[11], u[12], u[13]));
             units[units.length - 1].pos = pos;
             deployarea = false;
-        };
+        }
 
         let deployEnemy = function (unit, pos) {
             let u = unit;
             enemies.push(new Unit(u[0], u[1], u[2], u[3], u[4], u[5], u[6], u[7], u[8], u[9], u[10], u[11], u[12], u[13]));
             enemies[enemies.length - 1].pos = pos;
-
-        };
+        }
 
         let returnToBase = function (icon) {
             icon.pos = icon.defaultpos;
             icon.dragable = false;
-        };
+        }
 
         let gameOver = function (a) {
 
@@ -258,8 +252,7 @@ document.addEventListener("DOMContentLoaded", function() {
 
         let xxx = 0,
             yyy = 0;
-        let mouse =
-        {
+        let mouse = {
             x: 0,
             y: 0,
             down: false
@@ -614,10 +607,9 @@ document.addEventListener("DOMContentLoaded", function() {
                 updateBullets(dt);
                 updateIcons(dt);
                 //   checkCollisions();
-            };
+            }
 
             function updateIcons(dt) {
-
                 for (i = 0; i < icons.length; i++) {
                     if (icons[i].pos[1] > icons[i].defaultpos[1] && icons[i].respawn == true) {
                         icons[i].pos[1] -= icons[i].respawnrate * k * dt;
@@ -626,7 +618,7 @@ document.addEventListener("DOMContentLoaded", function() {
                         icons[i].respawn = false;
                     }
                 }
-            };
+            }
 
             function updateEntities(dt, list) {
                 // Update the tank position
@@ -745,7 +737,7 @@ document.addEventListener("DOMContentLoaded", function() {
                     if (u.time > 0.7 && u.speed > 0) {
                         u.moveAhead(dt);
                     }
-                };
+                }
             }
 
             function updateBullets(dt) {
@@ -796,7 +788,7 @@ document.addEventListener("DOMContentLoaded", function() {
                     renderBullets();
                     renderEntities(explosions);
                 }
-            };
+            }
 
             function renderArea(ctx) {
 
@@ -823,7 +815,7 @@ document.addEventListener("DOMContentLoaded", function() {
                 for (let x = c.width / 4; x < c.width; x += c.width / 4) {
                     ctx.moveTo(x + 0.1, c.height - c.width / 4);
                     ctx.lineTo(x + 0.1, c.height);
-                };
+                }
 
                 ctx.moveTo(0, c.height - c.width / 4);
                 ctx.lineTo(c.width, c.height - c.width / 4);
@@ -834,9 +826,7 @@ document.addEventListener("DOMContentLoaded", function() {
                 if (deployarea === true) {
                     drawDeployArea();
                 }
-
-
-            };
+            }
 
             function drawDeployArea() {
                 ctx.beginPath();
@@ -863,7 +853,7 @@ document.addEventListener("DOMContentLoaded", function() {
                     }
                     ctx.fillRect(c.width / 4.8 + c.width / 4 * i, c.height - c.width / 4.1, c.width / 30, c.width / 30);
                 };
-            };
+            }
 
 
             function renderEntities(list) {
@@ -872,7 +862,6 @@ document.addEventListener("DOMContentLoaded", function() {
                 }
                 drawTrLights();
                 drawIcons(icons);
-
             }
 
             function renderBullets() {
@@ -886,14 +875,12 @@ document.addEventListener("DOMContentLoaded", function() {
                     ctx.fill();
                     ctx.restore();
                 }
-
             }
 
 
             function drawIcons(list) {
                 for (let i = 0; i < list.length; i++) {
                     if (!list[i].dragable) {
-
                         ctx.save();
                         ctx.translate(list[i].pos[0] + list[i].sprite.resized[0] / 2, list[i].pos[1] + list[i].sprite.resized[1] / 2);
                         ctx.rotate(Math.PI / 180 * (-90));
@@ -917,8 +904,7 @@ document.addEventListener("DOMContentLoaded", function() {
                         ctx.restore();
                     }
                 }
-            };
-
+            }
 
             function renderEntity(entity) {
                 if (!entity.destroyed) {
@@ -992,8 +978,8 @@ document.addEventListener("DOMContentLoaded", function() {
                 function (callback) {
                     window.setTimeout(callback, 1000 / 60);
 
-                };
-        })();
+                }
+        })
 
         ///^^^^^^^///////////^^^^/////////
 
@@ -1013,7 +999,7 @@ document.addEventListener("DOMContentLoaded", function() {
             }
             maindiv.innerHTML = '<button id="start">Mulai</button><button id="info">Info</button><br/><span class="dif">Kesulitan:</span><br/><button id="btn-left">&lt</button><span class="dif" >' + dif[lvl] + '  </span><button id="btn-right">&gt</button>';
             lastTime = Date.now();
-        };
+        }
         //////////////////////////////////
 
         (function () {
@@ -1045,7 +1031,7 @@ document.addEventListener("DOMContentLoaded", function() {
                                 func();
                             });
                         }
-                    };
+                    }
                     resourceCache[url] = false;
                     img.src = url;
                 }
@@ -1067,14 +1053,13 @@ document.addEventListener("DOMContentLoaded", function() {
             function onReady(func) {
                 readyCallbacks.push(func);
             }
-            window.resources =
-            {
+            window.resources = {
                 load: load,
                 get: get,
                 onReady: onReady,
                 isReady: isReady
-            };
-        })();
+            }
+        })
 
         resources.load([
             "images/tank3.png",
