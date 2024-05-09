@@ -1001,7 +1001,7 @@ window.onload = () => {
             if (lvl < 0 || lvl > 9) {
                 lvl = 0;
             }
-            maindiv.innerHTML = '<button id="start" onclick="startGame ()">Mulai</button><button id="info" onclick="inf()">Info</button><br/><span class="dif">Kesulitan:</span><br/><button id="btn-left" onclick="changeLvl(0)">&lt</button><span class="dif" >' + dif[lvl] + '  </span><button id="btn-right" onclick="changeLvl (1)" >&gt</button>';
+            maindiv.innerHTML = '<button id="start" onclick="startGame()">Mulai</button><button id="info" onclick="inf()">Info</button><br/><span class="dif">Kesulitan:</span><br/><button id="btn-left" onclick="changeLvl(0)">&lt</button><span class="dif" >' + dif[lvl] + '  </span><button id="btn-right" onclick="changeLvl(1)" >&gt</button>';
             lastTime = Date.now();
         };
         //////////////////////////////////
