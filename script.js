@@ -33,6 +33,22 @@ function reset() {
             counter = 0;
             counter2 = 0;
         }
+let requestAnimFrame = (function () {
+            return window.requestAnimationFrame ||
+
+                window.webkitRequestAnimationFrame ||
+
+                window.mozRequestAnimationFrame ||
+
+                window.oRequestAnimationFrame ||
+
+                window.msRequestAnimationFrame ||
+
+                function (callback) {
+                    window.setTimeout(callback, 1000 / 60);
+                }
+        })
+
 document.addEventListener("DOMContentLoaded", function() {
             function Sprite(url, pos, size, resized, animspeed, frames, _index, once) {
                 this.pos = pos;
@@ -227,24 +243,6 @@ document.addEventListener("DOMContentLoaded", function() {
         /////////////////////////////
 
         /////////////^^^^^^^^^^^^^^////////////
-
-        let requestAnimFrame = (function () {
-
-            return window.requestAnimationFrame ||
-
-                window.webkitRequestAnimationFrame ||
-
-                window.mozRequestAnimationFrame ||
-
-                window.oRequestAnimationFrame ||
-
-                window.msRequestAnimationFrame ||
-
-                function (callback) {
-                    window.setTimeout(callback, 1000 / 60);
-
-                }
-        })
 
         ///^^^^^^^///////////^^^^/////////
 
@@ -1029,7 +1027,7 @@ function startGame() {
                 setTimeout(() => {
                         let _dif = document.getElementsByClassName("dif");
                         _dif[1].innerHTML = dif[lvl];
-                }, 900);
+                }, 100);
             }
 
             function inf() {
