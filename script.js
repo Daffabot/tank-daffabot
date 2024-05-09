@@ -45,7 +45,6 @@ document.addEventListener("DOMContentLoaded", function() {
                 }, 900);
             }
 
-        (function () {
             function Sprite(url, pos, size, resized, animspeed, frames, _index, once) {
                 this.pos = pos;
                 this.size = size;
@@ -79,9 +78,7 @@ document.addEventListener("DOMContentLoaded", function() {
                 }
             }
             window.Sprite = Sprite;
-        })
 
-        (function () {
             function Unit(status, pos, hp, speed, maxspeed, range, damage, reload, angle, defaultangle, dir, sprite) {
                 this.status = status;
                 this.pos = pos;
@@ -153,24 +150,20 @@ document.addEventListener("DOMContentLoaded", function() {
 
                     let x = Math.floor(this.pos[0] + ((this.sprite.resized[1] / 2 * this.dir) * Math.cos(this.angle / (180 / Math.PI))));
                     let y = Math.floor(this.pos[1] + ((this.sprite.resized[0] / 2 * this.dir) * Math.sin(this.angle / (180 / Math.PI))));
-                    bullets.push(
-                        {
+                    bullets.push({
                             pos: [x, y],
                             target: this.target,
                             speed: k * 12,
                             damage: this.damage,
                             angle: this.angle + getRandom(-5, 3),
                             dir: this.dir,
-
                         });
 
                     this.lastshot = 0;
 
                 }
             }
-
             window.Unit = Unit;
-        })
 
         let getRandom = function (min, max) {
             return Math.floor(Math.random() * (max - min + 1)) + min;
