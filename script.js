@@ -1043,13 +1043,11 @@ document.addEventListener("DOMContentLoaded", function() {
                 onReady: onReady,
                 isReady: isReady
             }
-        })
-
-        resources.load([
+            resources.load([
             "images/tank3.png",
             "images/bullet.png",
             "images/tile.png"
-        ]);
-
-        resources.onReady(loader);
+            ]);
+            resources.onReady(loader);
+        })
 });
