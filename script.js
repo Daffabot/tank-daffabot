@@ -39,10 +39,9 @@ window.onload = () => {
                 if (op == 0 && lvl > 0) {
                     lvl--;
                 }
-
                 let _dif = document.getElementsByClassName("dif");
                 _dif[1].innerHTML = dif[lvl];
-            };
+            }
 
         (function () {
             function Sprite(url, pos, size, resized, animspeed, frames, _index, once) {
@@ -972,7 +971,7 @@ window.onload = () => {
                     ctx.lineWidth = 1;
                 }
             }
-        };
+        }
 
         /////////////^^^^^^^^^^^^^^////////////
 
