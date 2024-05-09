@@ -976,11 +976,9 @@ document.addEventListener("DOMContentLoaded", function() {
 
         ///^^^^^^^///////////^^^^/////////
 
-        let infoButton = document.getElementById('info');
         let startBtn = document.getElementById('start');
         let btnLeft = document.getElementById('btn-left');
         let btnRight = document.getElementById('btn-right');
-        infoButton.addEventListener('click', inf);
         startBtn.addEventListener('click', startGame);
         btnLeft.addEventListener('click', () => changeLvl(0));
         btnRight.addEventListener('click', () => changeLvl(1));
@@ -990,7 +988,7 @@ document.addEventListener("DOMContentLoaded", function() {
             if (lvl < 0 || lvl > 9) {
                 lvl = 0;
             }
-            maindiv.innerHTML = '<button id="start">Mulai</button><button id="info">Info</button><br/><span class="dif">Kesulitan:</span><br/><button id="btn-left">&lt</button><span class="dif" >' + dif[lvl] + '  </span><button id="btn-right">&gt</button>';
+            maindiv.innerHTML = '<button id="start">Mulai</button><button id="info" onclick="inf()">Info</button><br/><span class="dif">Kesulitan:</span><br/><button id="btn-left">&lt</button><span class="dif" >' + dif[lvl] + '  </span><button id="btn-right">&gt</button>';
             lastTime = Date.now();
         }
         //////////////////////////////////
