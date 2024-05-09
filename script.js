@@ -39,8 +39,10 @@ document.addEventListener("DOMContentLoaded", function() {
                 if (op == 0 && lvl > 0) {
                     lvl--;
                 }
-                let _dif = document.getElementsByClassName("dif");
-                _dif[1].innerHTML = dif[lvl];
+                setTimeout(() => {
+                        let _dif = document.getElementsByClassName("dif");
+                        _dif[1].innerHTML = dif[lvl];
+                }, 900);
             }
 
         (function () {
