@@ -757,14 +757,14 @@ let startGame = function () {
     }
 
     function renderHP(entity) {
-
+            let reverse;
         if (entity.time > 0.8) {
             let hp = entity.hp * 100 / entity.maxhp;
             if (hp < 0) hp = 0;
             if (entity.dir < 0) {
-                let reverse = entity.sprite.resized[0];
+                reverse = entity.sprite.resized[0];
             } else {
-                let reverse = 0;
+                reverse = 0;
             }
 
             ctx.beginPath();
