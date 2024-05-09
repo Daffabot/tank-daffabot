@@ -253,7 +253,105 @@ document.addEventListener("DOMContentLoaded", function() {
 
         /////////////////////////////
 
-        function startGame() {
+        /////////////^^^^^^^^^^^^^^////////////
+
+        let requestAnimFrame = (function () {
+
+            return window.requestAnimationFrame ||
+
+                window.webkitRequestAnimationFrame ||
+
+                window.mozRequestAnimationFrame ||
+
+                window.oRequestAnimationFrame ||
+
+                window.msRequestAnimationFrame ||
+
+                function (callback) {
+                    window.setTimeout(callback, 1000 / 60);
+
+                }
+        })
+
+        ///^^^^^^^///////////^^^^/////////
+
+        function loader() {
+            let maindiv = document.getElementById("main");
+            if (lvl < 0 || lvl > 9) {
+                lvl = 0;
+            }
+            maindiv.innerHTML = '<button id="start" onclick="startGame()">Mulai</button><button id="info" onclick="inf()">Info</button><br/><span class="dif">Kesulitan:</span><br/><button id="btn-left" onclick="changeLvl(0)">&lt</button><span class="dif" >' + dif[lvl] + '  </span><button id="btn-right" onclick="changeLvl(1)">&gt</button>';
+            lastTime = Date.now();
+        }
+        //////////////////////////////////
+
+        (function () {
+            let resourceCache = {};
+            let loading = [];
+            let readyCallbacks = [];
+            // Load an image url or an array of image urls
+            function load(urlOrArr) {
+                if (urlOrArr instanceof Array) {
+                    urlOrArr.forEach(function (url) {
+                        _load(url);
+                    });
+                }
+                else {
+                    _load(urlOrArr);
+                }
+            }
+
+            function _load(url) {
+                if (resourceCache[url]) {
+                    return resourceCache[url];
+                }
+                else {
+                    let img = new Image();
+                    img.onload = function () {
+                        resourceCache[url] = img;
+                        if (isReady()) {
+                            readyCallbacks.forEach(function (func) {
+                                func();
+                            });
+                        }
+                    }
+                    resourceCache[url] = false;
+                    img.src = url;
+                }
+            }
+
+            function get(url) {
+                return resourceCache[url];
+            }
+            function isReady() {
+                let ready = true;
+                for (let k in resourceCache) {
+                    if (resourceCache.hasOwnProperty(k) && !resourceCache[k]) {
+                        ready = false;
+                    }
+                }
+                return ready;
+            }
+
+            function onReady(func) {
+                readyCallbacks.push(func);
+            }
+            window.resources = {
+                load: load,
+                get: get,
+                onReady: onReady,
+                isReady: isReady
+            }
+            resources.load([
+            "images/tank3.png",
+            "images/bullet.png",
+            "images/tile.png"
+            ]);
+            resources.onReady(loader);
+        })();
+});
+
+function startGame() {
 
             reset();
 
@@ -949,101 +1047,3 @@ document.addEventListener("DOMContentLoaded", function() {
                 }
             }
         }
-
-        /////////////^^^^^^^^^^^^^^////////////
-
-        let requestAnimFrame = (function () {
-
-            return window.requestAnimationFrame ||
-
-                window.webkitRequestAnimationFrame ||
-
-                window.mozRequestAnimationFrame ||
-
-                window.oRequestAnimationFrame ||
-
-                window.msRequestAnimationFrame ||
-
-                function (callback) {
-                    window.setTimeout(callback, 1000 / 60);
-
-                }
-        })
-
-        ///^^^^^^^///////////^^^^/////////
-
-        function loader() {
-            let maindiv = document.getElementById("main");
-            if (lvl < 0 || lvl > 9) {
-                lvl = 0;
-            }
-            maindiv.innerHTML = '<button id="start" onclick="startGame()">Mulai</button><button id="info" onclick="inf()">Info</button><br/><span class="dif">Kesulitan:</span><br/><button id="btn-left" onclick="changeLvl(0)">&lt</button><span class="dif" >' + dif[lvl] + '  </span><button id="btn-right" onclick="changeLvl(1)">&gt</button>';
-            lastTime = Date.now();
-        }
-        //////////////////////////////////
-
-        (function () {
-            let resourceCache = {};
-            let loading = [];
-            let readyCallbacks = [];
-            // Load an image url or an array of image urls
-            function load(urlOrArr) {
-                if (urlOrArr instanceof Array) {
-                    urlOrArr.forEach(function (url) {
-                        _load(url);
-                    });
-                }
-                else {
-                    _load(urlOrArr);
-                }
-            }
-
-            function _load(url) {
-                if (resourceCache[url]) {
-                    return resourceCache[url];
-                }
-                else {
-                    let img = new Image();
-                    img.onload = function () {
-                        resourceCache[url] = img;
-                        if (isReady()) {
-                            readyCallbacks.forEach(function (func) {
-                                func();
-                            });
-                        }
-                    }
-                    resourceCache[url] = false;
-                    img.src = url;
-                }
-            }
-
-            function get(url) {
-                return resourceCache[url];
-            }
-            function isReady() {
-                let ready = true;
-                for (let k in resourceCache) {
-                    if (resourceCache.hasOwnProperty(k) && !resourceCache[k]) {
-                        ready = false;
-                    }
-                }
-                return ready;
-            }
-
-            function onReady(func) {
-                readyCallbacks.push(func);
-            }
-            window.resources = {
-                load: load,
-                get: get,
-                onReady: onReady,
-                isReady: isReady
-            }
-            resources.load([
-            "images/tank3.png",
-            "images/bullet.png",
-            "images/tile.png"
-            ]);
-            resources.onReady(loader);
-        })();
-});
