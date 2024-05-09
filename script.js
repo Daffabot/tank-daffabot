@@ -344,13 +344,14 @@ function startGame() {
 
             maindiv.innerHTML = '<canvas id="c"></canvas>';
 
-            let c = document.getElementById("c");
+            setTimeout(() => {
+                        let c = document.getElementById("c");
+                }, 100);
 
             let ctx = c.getContext("2d");
 
             w = window.innerWidth;
             h = window.innerHeight;
-
 
             if (w < h) {
                 c.width = w - 46;
