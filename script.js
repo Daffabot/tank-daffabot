@@ -1049,5 +1049,5 @@ document.addEventListener("DOMContentLoaded", function() {
             "images/tile.png"
             ]);
             resources.onReady(loader);
-        })
+        })();
 });
