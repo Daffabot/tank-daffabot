@@ -19,7 +19,7 @@ let w, h, k, xo, yo,
             lvl = 0,     // 0...9
             inf = function(){
               alert(" Creator : Daffa Ahmad Ibrahim \n\n Created : 1/08/2018 \n\n Publicated :  8/8/18 \n\n Ultimate Actualisation : 02/05/2019\n\nAll rights reserved by Daffabot." )
-            }
+            };
 
 (function () {
     function Sprite(url, pos, size, resized, animspeed, frames, _index, once) {
