@@ -17,19 +17,8 @@ let w, h, k, xo, yo,
             gameNum = 0,
             game_paused = false,
             lvl = 0,     // 0...9
-            inf = function () {
-                let popup = document.getElementById('infdiv');
-                let btn = document.getElementById('info');
-                if (popup.style.display !== 'block') {
-                    popup.style.display = 'block';
-                    info.style.color = 'white';
-                    info.style.backgroundColor = 'red';
-                }
-                else {
-                    popup.style.display = 'none';
-                    info.style.color = 'red';
-                    info.style.backgroundColor = '#f3f3f3';
-                }
+            inf = function(){
+              alert(" Creator : Daffa Ahmad Ibrahim \n\n Created : 1/08/2018 \n\n Publicated :  8/8/18 \n\n Ultimate Actualisation : 02/05/2019\n\nAll rights reserved by Daffabot." )
             }
 
 (function () {
