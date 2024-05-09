@@ -1,5 +1,5 @@
 /* Written by Daffabot at github playground with some little help from Ali. https://github.com/daffabot/tank-daffabot  */
-window.onload = () => {
+document.addEventListener("DOMContentLoaded", function() {
         let w, h, k, xo, yo,
             units = [],
             icons = [],
@@ -1072,4 +1072,4 @@ window.onload = () => {
         ]);
 
         resources.onReady(loader);
-}
+});
