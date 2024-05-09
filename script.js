@@ -1,6 +1,6 @@
 /* Written by Daffabot at github playground with some little help from Ali. https://github.com/daffabot/tank-daffabot  */
-document.addEventListener("DOMContentLoaded", function() {
-        let w, h, k, xo, yo,
+
+let w, h, k, xo, yo,
             units = [],
             icons = [],
             bullets = [],
@@ -17,8 +17,23 @@ document.addEventListener("DOMContentLoaded", function() {
             counter2 = 0,
             gameNum = 0,
             game_paused = false,
-            lvl = 0     // 0...9
-
+            lvl = 0
+function reset() {
+            units = [];
+            icons = [];
+            bullets = [];
+            enemies = [];
+            explosions = [];
+            isGameOver = false;
+            gameTime = 0;
+            enemydep = 1;
+            firstwave = false;
+            nextwave = 0;
+            deployarea = false;
+            counter = 0;
+            counter2 = 0;
+        }
+document.addEventListener("DOMContentLoaded", function() {
             function Sprite(url, pos, size, resized, animspeed, frames, _index, once) {
                 this.pos = pos;
                 this.size = size;
@@ -201,22 +216,6 @@ document.addEventListener("DOMContentLoaded", function() {
             }
         }
 
-        let reset = function () {
-            units = [];
-            icons = [];
-            bullets = [];
-            enemies = [];
-            explosions = [];
-            isGameOver = false;
-            gameTime = 0;
-            enemydep = 1;
-            firstwave = false;
-            nextwave = 0;
-            deployarea = false;
-            counter = 0;
-            counter2 = 0;
-        }
-
         let xxx = 0,
             yyy = 0;
         let mouse = {
@@ -326,9 +325,7 @@ document.addEventListener("DOMContentLoaded", function() {
 });
 
 function startGame() {
-
             reset();
-
             let modal = document.getElementById("myModal");
             let span = document.getElementsByClassName("close")[0];
             let p = document.getElementsByClassName("modal-text")[0];
