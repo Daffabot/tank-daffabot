@@ -1,3 +1,4 @@
+document.addEventListener("DOMContentLoaded", function() {
 let w, h, k, xo, yo,
             units = [],
             icons = [],
@@ -901,5 +902,5 @@ resources.load([
 ]);
 
 resources.onReady(loader);
-
+})
 // The End
