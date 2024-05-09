@@ -25,6 +25,12 @@ let w, h, k, xo, yo,
             y: 0,
             down: false
         }
+let deployUnit = function (unit, pos) {
+            let u = unit;
+            units.push(new Unit(u[0], u[1], u[2], u[3], u[4], u[5], u[6], u[7], u[8], u[9], u[10], u[11], u[12], u[13]));
+            units[units.length - 1].pos = pos;
+            deployarea = false;
+        }
 function reset() {
             units = [];
             icons = [];
@@ -183,13 +189,6 @@ document.addEventListener("DOMContentLoaded", function() {
 
         let getDistance = function (own, ally) {
             return Math.floor(Math.sqrt(Math.pow(own[0] - ally[0], 2) + Math.pow(own[1] - ally[1], 2)));
-        }
-
-        let deployUnit = function (unit, pos) {
-            let u = unit;
-            units.push(new Unit(u[0], u[1], u[2], u[3], u[4], u[5], u[6], u[7], u[8], u[9], u[10], u[11], u[12], u[13]));
-            units[units.length - 1].pos = pos;
-            deployarea = false;
         }
 
         let deployEnemy = function (unit, pos) {
@@ -472,62 +471,6 @@ function startGame() {
                         modal.style.marginLeft = c.width * 0.1 + xo + "px";
                         modal.style.display = "block";
                     }
-                }
-            }
-
-            function checkDeployment(xx, yy) {
-
-                let inside = false;
-
-                if (xx > c.width / 100 && yy > c.height / 2 && xx < c.width - c.width / 100 - 3 && yy < c.height / 2 + c.height / 3.7) {
-                    inside = true;
-                }
-
-                let allies = false;
-                for (let i = 0; i < units.length; i++) {
-                    if (getDistance([xx, yy], units[i].pos) < 2 * k) allies = true;
-                }
-
-                if (basictank[0] == 'readyfordeploy' && inside && !allies) {
-                    basictank[0] = ' ';
-                    deployUnit(basictank, [xx, yy]);
-                    units[units.length - 1].status = 'acceleration';
-                    icons[0].pos = [icons[0].defaultpos[0], icons[0].defaultpos[1] + c.width / 4];
-                    icons[0].dragable = false;
-                    icons[0].respawn = true;
-                    deployarea = false;
-                }
-                else if (basictank[0] == 'readyfordeploy' && (!inside && !icons[0].respawn || allies)) {
-                    returnToBase(icons[0]);
-                    basictank[0] = ' '
-                }
-
-                if (lighttank[0] == 'readyfordeploy' && inside && !allies) {
-                    lighttank[0] = ' ';
-                    deployUnit(lighttank, [xx, yy]);
-                    units[units.length - 1].status = 'acceleration';
-                    icons[1].pos = [icons[1].defaultpos[0], icons[1].defaultpos[1] + c.width / 4];;
-                    icons[1].dragable = false;
-                    icons[1].respawn = true;
-
-                }
-                else if (lighttank[0] == 'readyfordeploy' && (!inside && !icons[1].respawn || allies)) {
-                    returnToBase(icons[1]);
-                    lighttank[0] = " ";
-                }
-
-                if (ttank[0] == 'readyfordeploy' && inside && !allies) {
-                    ttank[0] = ' ';
-                    deployUnit(ttank, [xx, yy]);
-                    units[units.length - 1].status = 'acceleration';
-                    icons[2].pos = [icons[2].defaultpos[0], icons[2].defaultpos[1] + c.width / 4];;
-                    icons[2].dragable = false;
-                    icons[2].respawn = true;
-
-                }
-                else if (ttank[0] == 'readyfordeploy' && (!inside && !icons[2].respawn || allies)) {
-                    returnToBase(icons[2]);
-                    ttank[0] = " ";
                 }
             }
 
@@ -1042,3 +985,59 @@ function startGame() {
                     info.style.backgroundColor = '#f3f3f3';
                 }
             }
+function checkDeployment(xx, yy) {
+
+                let inside = false;
+
+                if (xx > c.width / 100 && yy > c.height / 2 && xx < c.width - c.width / 100 - 3 && yy < c.height / 2 + c.height / 3.7) {
+                    inside = true;
+                }
+
+                let allies = false;
+                for (let i = 0; i < units.length; i++) {
+                    if (getDistance([xx, yy], units[i].pos) < 2 * k) allies = true;
+                }
+
+                if (basictank[0] == 'readyfordeploy' && inside && !allies) {
+                    basictank[0] = ' ';
+                    deployUnit(basictank, [xx, yy]);
+                    units[units.length - 1].status = 'acceleration';
+                    icons[0].pos = [icons[0].defaultpos[0], icons[0].defaultpos[1] + c.width / 4];
+                    icons[0].dragable = false;
+                    icons[0].respawn = true;
+                    deployarea = false;
+                }
+                else if (basictank[0] == 'readyfordeploy' && (!inside && !icons[0].respawn || allies)) {
+                    returnToBase(icons[0]);
+                    basictank[0] = ' '
+                }
+
+                if (lighttank[0] == 'readyfordeploy' && inside && !allies) {
+                    lighttank[0] = ' ';
+                    deployUnit(lighttank, [xx, yy]);
+                    units[units.length - 1].status = 'acceleration';
+                    icons[1].pos = [icons[1].defaultpos[0], icons[1].defaultpos[1] + c.width / 4];;
+                    icons[1].dragable = false;
+                    icons[1].respawn = true;
+
+                }
+                else if (lighttank[0] == 'readyfordeploy' && (!inside && !icons[1].respawn || allies)) {
+                    returnToBase(icons[1]);
+                    lighttank[0] = " ";
+                }
+
+                if (ttank[0] == 'readyfordeploy' && inside && !allies) {
+                    ttank[0] = ' ';
+                    deployUnit(ttank, [xx, yy]);
+                    units[units.length - 1].status = 'acceleration';
+                    icons[2].pos = [icons[2].defaultpos[0], icons[2].defaultpos[1] + c.width / 4];;
+                    icons[2].dragable = false;
+                    icons[2].respawn = true;
+
+                }
+                else if (ttank[0] == 'readyfordeploy' && (!inside && !icons[2].respawn || allies)) {
+                    returnToBase(icons[2]);
+                    ttank[0] = " ";
+                }
+            }
+
