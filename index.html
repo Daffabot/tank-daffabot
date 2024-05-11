@@ -3,7 +3,7 @@
 <head>
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
 <meta http-equiv=”Content-Type” content=”text/html; charset=utf-8″ />
-        <title>Tank Daffabot</title>
+<title>Tank Daffabot</title>
         <!---Written by Daffabot at Github -->
         
         <!--- Updates(27.02.2022):
@@ -14,18 +14,22 @@
              *Movement speed increased.
              *Collisions handling improved.
              *Deployment of many tanks onto one spot fixed.              
-        --->         
+        --->
+        <!--- Updates(2024):
+             *Define variable and function with let
+             *Fix uncaught define function and variable
+             *Change tag font to tag h1
+             *Fix css
+        --->
 <link rel="stylesheet" href="style.css">
-<script src="script.js"></script>
+<script defer src="script.js"></script>
 </head>
 <body>
 <div id="main">
-    <b><font size="+3">Tank Super</font></b>
-    <br>
-    <br>
-    <p>Loading...</p>
+    <h1>Tank Super</h1>
+    <p class="loader">Loading...</p>
 </div>
-       <div id="infdiv">Seret unit yang tersedia ke area penyebaran.<br/><br/>Kamu menang, ketika salah satu unit Kamu sampai ke garis hijau di bagian atas medan pertempuran.<br/><br/>Jangan biarkan musuh mencapai markasmu.</div>
+       <div id="infdiv">Seret unit yang tersedia ke area penyebaran.<br /><br />Kamu menang, ketika salah satu unit Kamu sampai ke garis hijau di bagian atas medan pertempuran.<br /><br />Jangan biarkan musuh mencapai markasmu.</div>
        <div id="log"></div>
        
        <div id="myModal" class="modal">
