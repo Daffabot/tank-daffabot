@@ -1,16 +1,14 @@
 body {
- margin: 0;
- padding-top: 50%;
- position: relative;
+    margin: 0;
+    padding-top: 50%;
+    position: relative;
 }
 
 #main {
-        
     padding: 20px;
     box-shadow: 0 0 100px 80px  lightblue;
     background: lightblue;
     text-align: center;
-    
 }
 
 .dif {
@@ -62,7 +60,7 @@ button {
 #infdiv {
     display:none;
     position: relative;
-    margin-auto
+    margin: auto;
     width: 80%;
     border: 3px solid lightblue;
     background-color: white;
@@ -110,3 +108,10 @@ button {
   cursor: pointer;
 }
     
+h1 {
+  font-size: xx-large;
+}
+
+.loader {
+  margin-top: 40px;
+}
