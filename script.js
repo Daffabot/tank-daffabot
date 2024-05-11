@@ -1,6 +1,7 @@
 //Written by Daffabot at github playground with some little help from Ali. https://github.com/daffabot/tank-daffabot
+//Script baru dengan menggunakan let
 
-var w, h, k, xo, yo,
+let w, h, k, xo, yo,
     units = [],
     icons = [],
     bullets = [],
@@ -19,8 +20,8 @@ var w, h, k, xo, yo,
     game_paused = false,
     lvl = 0,     // 0...9
     inf = function () {
-        var popup = document.getElementById('infdiv');
-        var btn = document.getElementById('info');
+        let popup = document.getElementById('infdiv');
+        let btn = document.getElementById('info');
         if (popup.style.display !== 'block') {
             popup.style.display = 'block';
             info.style.color = 'white';
@@ -40,7 +41,7 @@ var w, h, k, xo, yo,
             lvl--;
         }
 
-        var _dif = document.getElementsByClassName("dif");
+        let _dif = document.getElementsByClassName("dif");
         _dif[1].innerHTML = dif[lvl];
     };
 
@@ -66,11 +67,11 @@ var w, h, k, xo, yo,
 
         render: function (ctx) {
 
-            var frame;
+            let frame;
 
             if (this.animspeed > 0) {
-                var max = this.frames.length;
-                var idx = Math.floor(this._index); frame = this.frames[idx % max];
+                let max = this.frames.length;
+                let idx = Math.floor(this._index); frame = this.frames[idx % max];
                 if (this.once && idx >= max) {
                     this.done = true;
                     return;
@@ -80,8 +81,8 @@ var w, h, k, xo, yo,
                 frame = 0;
             }
 
-            var x = this.pos[0];
-            var y = this.pos[1];
+            let x = this.pos[0];
+            let y = this.pos[1];
 
             x += frame * this.size[0]; ctx.drawImage(resources.get(this.url), x, y, this.size[0], this.size[1], 0, 0, this.resized[0], this.resized[1]);
         }
@@ -109,8 +110,8 @@ var w, h, k, xo, yo,
     Unit.prototype = {
 
         getAngle: function (target) {
-            var x = this.pos[0] - target[0];
-            var y = this.pos[1] - target[1];
+            let x = this.pos[0] - target[0];
+            let y = this.pos[1] - target[1];
             if (x < 0) {
                 return Math.floor(Math.atan(y / x) * (180 / Math.PI));
             }
@@ -120,7 +121,7 @@ var w, h, k, xo, yo,
         },
 
         moveAhead: function (dt) {
-            var rad = this.angle / (180 / Math.PI);
+            let rad = this.angle / (180 / Math.PI);
             this.pos[0] += Math.cos(rad) * this.speed * dt * this.dir;
             this.pos[1] += Math.sin(rad) * this.speed * dt * this.dir;
         },
@@ -128,7 +129,7 @@ var w, h, k, xo, yo,
         findTarget: function (t) {
             for (i = 0; i < t.length; i++) {
 
-                var dis = this.getDistance(t[i]);
+                let dis = this.getDistance(t[i]);
                 if (dis < this.range && !t[i].destroyed && t[i].time > 0.7 && t[i].pos[1] > k) {
                     this.target = t[i];
                     this.status = "targetfound";
@@ -139,16 +140,16 @@ var w, h, k, xo, yo,
 
         avoidCollision: function (list, ownindx, dt) {
 
-            var l = list;
+            let l = list;
 
             for (i = 0; i < l.length; i++) {
                 if (i == ownindx) continue;
                 if (this.getDistance(l[i]) < k * 8) {
-                    for (var sec = 2; sec > 0; sec--) {
+                    for (let sec = 2; sec > 0; sec--) {
 
-                        var ownfuturepos = [this.pos[0] + (Math.cos(this.angle / (180 / Math.PI)) * this.speed * sec * this.dir), this.pos[1] + (Math.sin(this.angle / (180 / Math.PI)) * this.speed * sec * this.dir)];
+                        let ownfuturepos = [this.pos[0] + (Math.cos(this.angle / (180 / Math.PI)) * this.speed * sec * this.dir), this.pos[1] + (Math.sin(this.angle / (180 / Math.PI)) * this.speed * sec * this.dir)];
 
-                        var allyfuturepos = [l[i].pos[0] + (Math.cos(l[i].angle / (180 / Math.PI)) * l[i].speed * sec * this.dir), l[i].pos[1] + (Math.sin(l[i].angle / (180 / Math.PI)) * l[i].speed * sec * this.dir)];
+                        let allyfuturepos = [l[i].pos[0] + (Math.cos(l[i].angle / (180 / Math.PI)) * l[i].speed * sec * this.dir), l[i].pos[1] + (Math.sin(l[i].angle / (180 / Math.PI)) * l[i].speed * sec * this.dir)];
                         if (getDistance(ownfuturepos, allyfuturepos) < k * 3 && this.pos[1] * this.dir > l[i].pos[1] * l[i].dir && Math.abs(ownfuturepos[0] - allyfuturepos[0]) < this.sprite.resized[0]) {
                             this.speed -= 160 / Math.pow(sec, 4) * dt;
                         }
@@ -162,8 +163,8 @@ var w, h, k, xo, yo,
         },
 
         fireOnTarget: function () {
-            var x = Math.floor(this.pos[0] + ((this.sprite.resized[1] / 2 * this.dir) * Math.cos(this.angle / (180 / Math.PI))));
-            var y = Math.floor(this.pos[1] + ((this.sprite.resized[0] / 2 * this.dir) * Math.sin(this.angle / (180 / Math.PI))));
+            let x = Math.floor(this.pos[0] + ((this.sprite.resized[1] / 2 * this.dir) * Math.cos(this.angle / (180 / Math.PI))));
+            let y = Math.floor(this.pos[1] + ((this.sprite.resized[0] / 2 * this.dir) * Math.sin(this.angle / (180 / Math.PI))));
             bullets.push(
                 {
                     pos: [x, y],
@@ -180,46 +181,46 @@ var w, h, k, xo, yo,
     window.Unit = Unit;
 })();
 
-var getRandom = function (min, max) {
+let getRandom = function (min, max) {
     return Math.floor(Math.random() * (max - min + 1)) + min;
 };
 
-var getDistance = function (own, ally) {
+let getDistance = function (own, ally) {
 
     return Math.floor(Math.sqrt(Math.pow(own[0] - ally[0], 2) + Math.pow(own[1] - ally[1], 2)));
 };
 
-var deployUnit = function (unit, pos) {
-    var u = unit;
+let deployUnit = function (unit, pos) {
+    let u = unit;
     units.push(new Unit(u[0], u[1], u[2], u[3], u[4], u[5], u[6], u[7], u[8], u[9], u[10], u[11], u[12], u[13]));
     units[units.length - 1].pos = pos;
     deployarea = false;
 };
 
-var deployEnemy = function (unit, pos) {
-    var u = unit;
+let deployEnemy = function (unit, pos) {
+    let u = unit;
     enemies.push(new Unit(u[0], u[1], u[2], u[3], u[4], u[5], u[6], u[7], u[8], u[9], u[10], u[11], u[12], u[13]));
     enemies[enemies.length - 1].pos = pos;
 
 };
 
-var returnToBase = function (icon) {
+let returnToBase = function (icon) {
     icon.pos = icon.defaultpos;
     icon.dragable = false;
 };
 
-var gameOver = function (a) {
-
-    var _min = Math.floor(gameTime / 60);
-    var _sec = ('0' + Math.floor(gameTime % 60)).slice(-2);
+let gameOver = function (a) {
+    let log, log_item;
+    let _min = Math.floor(gameTime / 60);
+    let _sec = ('0' + Math.floor(gameTime % 60)).slice(-2);
 
     switch (a) {
         case 'win':
             alert("Misi selesai! Waktumu " + _min + ':' + _sec + '\n\nKehilangan: ' + counter + ' units.\n\nMusuh yang dihancurkan: ' + counter2 + '.');
 
-            var log_item = "<p>Game " + ++gameNum + ": 🏆 Menang ⏲" + _min + ':' + _sec + ' /' + dif[lvl] + ' /' + "</p>";
+            log_item = "<p>Game " + ++gameNum + ": 🏆 Menang ⏲" + _min + ':' + _sec + ' /' + dif[lvl] + ' /' + "</p>";
             if (lvl < dif.length - 1) lvl++;
-            var log = document.getElementById('log');
+            log = document.getElementById('log');
             log.innerHTML += log_item;
             document.body.style.paddingTop = 50 - (gameNum * 3) + "%";
             log.style.display = "block";
@@ -229,9 +230,9 @@ var gameOver = function (a) {
         case 'loss':
             alert("Misi gagal!" + '\n\nKehilangan: ' + counter + ' units.\n\nMusuh yang dihancurkan: ' + counter2 + '.');
 
-            var log_item = "<p>Game " + ++gameNum + ": 💩 Kalah ⏲" + _min + ':' + _sec + ' /' + dif[lvl] + ' /' + "</p>";
+            log_item = "<p>Game " + ++gameNum + ": 💩 Kalah ⏲" + _min + ':' + _sec + ' /' + dif[lvl] + ' /' + "</p>";
             if (lvl > 0) lvl--;
-            var log = document.getElementById('log');
+            log = document.getElementById('log');
             log.innerHTML += log_item;
             document.body.style.paddingTop = 50 - (gameNum * 3) + "%";
             log.style.display = "block";
@@ -240,7 +241,7 @@ var gameOver = function (a) {
     }
 }
 
-var reset = function () {
+let reset = function () {
     units = [];
     icons = [];
     bullets = [];
@@ -255,9 +256,9 @@ var reset = function () {
     counter = 0;
     counter2 = 0;
 }
-var xxx = 0,
+let xxx = 0,
     yyy = 0;
-var mouse = {
+let mouse = {
     x: 0,
     y: 0,
     down: false
@@ -265,32 +266,32 @@ var mouse = {
 
 //Start game
 
-var startGame = function () {
+let startGame = function () {
 
     reset();
 
-    var modal = document.getElementById("myModal");
-    var span = document.getElementsByClassName("close")[0];
-    var p = document.getElementsByClassName("modal-text")[0];
+    let modal = document.getElementById("myModal");
+    let span = document.getElementsByClassName("close")[0];
+    let p = document.getElementsByClassName("modal-text")[0];
     span.onclick = function () {
         modal.style.display = "none";
         game_paused = !game_paused;
     }
 
-    var log = document.getElementById('log');
-    var popup = document.getElementById('infdiv');
+    let log = document.getElementById('log');
+    let popup = document.getElementById('infdiv');
 
     log.style.display = "none";
     popup.style.display = 'none';
     document.body.style.paddingTop = 0;
 
-    var maindiv = document.getElementById("main");
+    let maindiv = document.getElementById("main");
 
     maindiv.innerHTML = '<canvas id="c"></canvas>';
 
-    var c = document.getElementById("c");
+    let c = document.getElementById("c");
 
-    var ctx = c.getContext("2d");
+    let ctx = c.getContext("2d");
 
     w = window.innerWidth;
     h = window.innerHeight;
@@ -348,7 +349,7 @@ var startGame = function () {
 
     c.addEventListener("touchmove", function (event) {
 
-        var touch = event.touches[0];
+        let touch = event.touches[0];
         xxx = touch.pageX - xo - 3;
         yyy = touch.pageY - yo - 3;
 
@@ -418,14 +419,14 @@ var startGame = function () {
 
     function checkDeployment(xx, yy) {
 
-        var inside = false;
+        let inside = false;
 
         if (xx > c.width / 100 && yy > c.height / 2 && xx < c.width - c.width / 100 - 3 && yy < c.height / 2 + c.height / 3.7) {
             inside = true;
         }
 
-        var allies = false;
-        for (var i = 0; i < units.length; i++) {
+        let allies = false;
+        for (let i = 0; i < units.length; i++) {
             if (getDistance([xx, yy], units[i].pos) < 2 * k) allies = true;
         }
 
@@ -478,17 +479,17 @@ var startGame = function () {
     // units
     // stats -- status, pos, hp, speed, maxspeed, range, damage, reload, angle, defaultangle , dir, sprite
 
-    var basictank = ['acceleration', [0, 0], 1500, 0, k * 1.5, k * 7, 399, 1.3, - 90, - 90, 1, new Sprite('images/tank3.png', [55, 76], [194, 135], [c.width / 11, c.height / 21])];
+    let basictank = ['acceleration', [0, 0], 1500, 0, k * 1.5, k * 7, 399, 1.3, - 90, - 90, 1, new Sprite('images/tank3.png', [55, 76], [194, 135], [c.width / 11, c.height / 21])];
 
-    var lighttank = ['acceleration', [0, 0], 300, 0, k * 5.5, k * 10, 149, 0.9, - 90, - 90, 1, new Sprite("images/tank3.png", [71, 600], [159, 130], [c.width / 13, c.height / 24])];
+    let lighttank = ['acceleration', [0, 0], 300, 0, k * 5.5, k * 10, 149, 0.9, - 90, - 90, 1, new Sprite("images/tank3.png", [71, 600], [159, 130], [c.width / 13, c.height / 24])];
 
-    var ttank = ['acceleration', [0, 0], 150, 0, k * 3.5, k * 12.5, 30, 0.05, - 90, - 90, 1, new Sprite("images/tank3.png", [52, 269], [205, 124], [c.width / 11.6, c.height / 24])];
+    let ttank = ['acceleration', [0, 0], 150, 0, k * 3.5, k * 12.5, 30, 0.05, - 90, - 90, 1, new Sprite("images/tank3.png", [52, 269], [205, 124], [c.width / 11.6, c.height / 24])];
     //enemy units
-    var enemybasic = ['acceleration', [0, 0], 1500, 0, k * 1.5, k * 7, 399, 1.3, - 90, - 90, - 1, new Sprite('images/tank3.png', [365, 76], [194, 135], [c.width / 11, c.height / 21])];
+    let enemybasic = ['acceleration', [0, 0], 1500, 0, k * 1.5, k * 7, 399, 1.3, - 90, - 90, - 1, new Sprite('images/tank3.png', [365, 76], [194, 135], [c.width / 11, c.height / 21])];
 
-    var enemylight = ['acceleration', [200, 200], 300, 0, k * 5.5, k * 10, 149, 0.7, - 90, - 90, - 1, new Sprite("images/tank3.png", [395, 600], [159, 130], [c.width / 13, c.height / 24])];
+    let enemylight = ['acceleration', [200, 200], 300, 0, k * 5.5, k * 10, 149, 0.7, - 90, - 90, - 1, new Sprite("images/tank3.png", [395, 600], [159, 130], [c.width / 13, c.height / 24])];
 
-    var enemyttank = ['acceleration', [0, 0], 150, 0, k * 3.5, k * 12.5, 10, 0.05, - 90, - 90, - 1, new Sprite("images/tank3.png", [362, 269], [205, 124], [c.width / 11.6, c.height / 24])];
+    let enemyttank = ['acceleration', [0, 0], 150, 0, k * 3.5, k * 12.5, 10, 0.05, - 90, - 90, - 1, new Sprite("images/tank3.png", [362, 269], [205, 124], [c.width / 11.6, c.height / 24])];
 
     main()
 
@@ -496,11 +497,11 @@ var startGame = function () {
 
     function main() {
 
-        var now = Date.now();
+        let now = Date.now();
 
         if (!game_paused) {
 
-            var dt = (now - lastTime) / 1000;
+            let dt = (now - lastTime) / 1000;
 
             update(dt);
 
@@ -589,13 +590,13 @@ var startGame = function () {
 
             if (lvl == 9) {
 
-                for (var x = 0; x < 7; x++) {
+                for (let x = 0; x < 7; x++) {
                     setTimeout(deployEnemy, x * 50, enemybasic, [c.width / 8 + x * (c.width / 8), c.height / 4])
                 }
-                for (var x = 0; x < 6; x++) {
+                for (let x = 0; x < 6; x++) {
                     setTimeout(deployEnemy, x * 50, enemylight, [c.width / 8 + x * (c.width / 8) + c.width / 16, c.height / 7])
                 }
-                for (var x = 0; x < 7; x++) {
+                for (let x = 0; x < 7; x++) {
                     setTimeout(deployEnemy, x * 50, enemyttank, [c.width / 8 + x * (c.width / 8), c.height / 20])
                 }
 
@@ -639,9 +640,9 @@ var startGame = function () {
 
         // Update the tank position
 
-        for (var i = 0; i < list.length; i++) {
-            var u = list[i];
-            var u2;
+        for (let i = 0; i < list.length; i++) {
+            let u = list[i];
+            let u2;
 
             list == units ? u2 = enemies : u2 = units;
 
@@ -755,7 +756,7 @@ var startGame = function () {
 
         // Update all the explosions
 
-        for (var i = 0; i < explosions.length; i++) {
+        for (let i = 0; i < explosions.length; i++) {
             explosions[i].sprite.update(dt);
 
             // Remove if animation is done
@@ -767,9 +768,9 @@ var startGame = function () {
 
         // Update all the bullets
 
-        for (var i = 0; i < bullets.length; i++) {
-            var b = bullets[i];
-            var rad = b.angle / (180 / Math.PI);
+        for (let i = 0; i < bullets.length; i++) {
+            let b = bullets[i];
+            let rad = b.angle / (180 / Math.PI);
             b.pos[0] += Math.cos(rad) * b.speed * dt * b.dir;
             b.pos[1] += Math.sin(rad) * b.speed * dt * b.dir;
 
@@ -828,7 +829,7 @@ var startGame = function () {
 
 
         ctx.beginPath();
-        for (var x = c.width / 4; x < c.width; x += c.width / 4) {
+        for (let x = c.width / 4; x < c.width; x += c.width / 4) {
 
             ctx.moveTo(x + 0.1, c.height - c.width / 4);
             ctx.lineTo(x + 0.1, c.height);
@@ -878,7 +879,7 @@ var startGame = function () {
 
 
     function renderEntities(list) {
-        for (var i = 0; i < list.length; i++) {
+        for (let i = 0; i < list.length; i++) {
             renderEntity(list[i]);
 
         }
@@ -887,7 +888,7 @@ var startGame = function () {
     }
 
     function renderBullets() {
-        for (var i = 0; i < bullets.length; i++) {
+        for (let i = 0; i < bullets.length; i++) {
 
             ctx.save();
 
@@ -900,7 +901,7 @@ var startGame = function () {
     }
 
     function drawIcons(list) {
-        for (var i = 0; i < list.length; i++) {
+        for (let i = 0; i < list.length; i++) {
             if (!list[i].dragable) {
                 ctx.save();
                 ctx.translate(list[i].pos[0] + list[i].sprite.resized[0] / 2, list[i].pos[1] + list[i].sprite.resized[1] / 2);
@@ -952,14 +953,15 @@ var startGame = function () {
     }
 
     function renderHP(entity) {
+        let reverse;
         if (entity.time > 0.8) {
-            var hp = entity.hp * 100 / entity.maxhp;
+            let hp = entity.hp * 100 / entity.maxhp;
             if (hp < 0) hp = 0;
             if (entity.dir < 0) {
-                var reverse = entity.sprite.resized[0];
+                reverse = entity.sprite.resized[0];
             }
             else {
-                var reverse = 0;
+                reverse = 0;
             }
 
             ctx.beginPath();
@@ -994,7 +996,7 @@ var startGame = function () {
 
 //Request animation frame
 
-var requestAnimFrame = (function () {
+let requestAnimFrame = (function () {
     return window.requestAnimationFrame ||
 
         window.webkitRequestAnimationFrame ||
@@ -1014,7 +1016,7 @@ var requestAnimFrame = (function () {
 
 function loader() {
 
-    var maindiv = document.getElementById("main");
+    let maindiv = document.getElementById("main");
 
 
     if (lvl < 0 || lvl > 9) {
@@ -1030,9 +1032,9 @@ function loader() {
 //Resource image
 
 (function () {
-    var resourceCache = {};
-    var loading = [];
-    var readyCallbacks = [];
+    let resourceCache = {};
+    let loading = [];
+    let readyCallbacks = [];
     // Load an image url or an array of image urls
     function load(urlOrArr) {
         if (urlOrArr instanceof Array) {
@@ -1050,7 +1052,7 @@ function loader() {
             return resourceCache[url];
         }
         else {
-            var img = new Image();
+            let img = new Image();
             img.onload = function () {
                 resourceCache[url] = img;
                 if (isReady()) {
@@ -1068,8 +1070,8 @@ function loader() {
         return resourceCache[url];
     }
     function isReady() {
-        var ready = true;
-        for (var k in resourceCache) {
+        let ready = true;
+        for (let k in resourceCache) {
             if (resourceCache.hasOwnProperty(k) && !resourceCache[k]) {
                 ready = false;
             }
@@ -1080,8 +1082,7 @@ function loader() {
     function onReady(func) {
         readyCallbacks.push(func);
     }
-    window.resources =
-    {
+    window.resources = {
         load: load,
         get: get,
         onReady: onReady,
